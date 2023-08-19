@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rates</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Exchange Rates for {{ date }}</h1>
+
+    <div class="exchange-rates-container">
+        <div class="exchange-column">
+            {% for rate in exchange_rates %}
+                <div class="exchange-rate">
+                    {{ rate.currency.char_code }}: {{ rate.value }}
+                </div>
+                {% if forloop.counter|divisibleby:"9" and not forloop.last %}
+                    </div>
+                    <div class="exchange-column">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
